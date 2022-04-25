@@ -9,13 +9,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -30,6 +33,8 @@ public class ItemRepository {
     private final JdbcTemplate jdbcTemplate;
 
     private final SimpleJdbcInsert itemInsert;
+
+    private final static RowMapper<Item> ITEM_ROW_MAPPER = BeanPropertyRowMapper.newInstance(Item.class);
 
     public ItemRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -78,5 +83,13 @@ public class ItemRepository {
                 .description(description)
                 .id(id)
                 .build();
+    }
+
+    public Item findBiId(long id){
+        return jdbcTemplate.queryForObject("select * from items where id = ?", ITEM_ROW_MAPPER, id);
+    }
+
+    public List<Item> findAll(){
+        return jdbcTemplate.query("select * from items", ITEM_ROW_MAPPER);
     }
 }
