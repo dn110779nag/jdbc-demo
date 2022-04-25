@@ -13,7 +13,10 @@ public class ItemService {
 
     @Transactional
     public Item create(String name, String description) throws Exception {
-        Item item = itemRepository.create3(name, description);
+        Item item = itemRepository.save(Item.builder()
+                        .name(name)
+                        .description(description)
+                .build());
         if(name.equals("ERROR")){
             throw new RuntimeException("rollback");
         }

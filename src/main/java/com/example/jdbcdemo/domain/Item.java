@@ -4,6 +4,9 @@
  */
 package com.example.jdbcdemo.domain;
 
+
+import javax.persistence.*;
+
 /**
  *
  * @author dn110
@@ -12,8 +15,12 @@ package com.example.jdbcdemo.domain;
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor
 @lombok.Builder
+@Entity
+@Table(name = "items")
 public class Item {
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
