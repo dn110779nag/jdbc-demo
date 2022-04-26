@@ -3,24 +3,17 @@ package com.example.jdbcdemo.repos;
 
 import com.example.jdbcdemo.TCSupport;
 import com.example.jdbcdemo.domain.Item;
-import java.sql.SQLException;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
 
-@SpringBootTest(properties = {
-    "spring.datasource.url=jdbc:tc:postgresql:14:///test_database",
-    "spring.datasource.username=foo",
-    "spring.datasource.password=secret"
-})
+@SpringBootTest
 public class ItemRepositoryTest extends TCSupport {
     
     @Autowired
@@ -36,7 +29,7 @@ public class ItemRepositoryTest extends TCSupport {
 
 
     @Test
-    public void testCreate() throws SQLException {
+    public void testCreate(){
         Item saved = instance.save(Item.builder()
                 .name("test")
                 .description("very long description")

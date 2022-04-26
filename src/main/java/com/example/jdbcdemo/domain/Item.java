@@ -5,7 +5,8 @@
 package com.example.jdbcdemo.domain;
 
 
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
 
 /**
  *
@@ -15,12 +16,10 @@ import javax.persistence.*;
 @lombok.AllArgsConstructor
 @lombok.NoArgsConstructor
 @lombok.Builder
-@Entity
-@Table(name = "items")
+@Table("items")
 public class Item {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String description;
