@@ -35,22 +35,22 @@ public class ItemRepositoryTest extends TCSupport {
 
 
     @Test
-    public void testCreate() throws SQLException {
+    public void testCreate() {
         instance.create("test", "very long description");
         String result = jdbcTemplate.queryForObject("select name from items", String.class);
         assertThat(result).isEqualTo("test");
     }
     
     @Test
-    public void testCreate2() throws SQLException {
+    public void testCreate2() {
         Item item = instance.create2("test", "very long description");
-        String result = jdbcTemplate.queryForObject("select name from items", String.class);
+        Item result = instance.findBiId(item.getId());
         assertThat(item.getId()).isPositive();
-        assertThat(result).isEqualTo("test");
+        assertThat(result.getName()).isEqualTo("test");
     }
 
     @Test
-    public void testCreate3() throws SQLException {
+    public void testCreate3() {
         Item item = instance.create3("test", "very long description");
         String result = jdbcTemplate.queryForObject("select name from items", String.class);
         assertThat(item.getId()).isPositive();
@@ -64,7 +64,7 @@ public class ItemRepositoryTest extends TCSupport {
 
         assertThat(item.getId()).isPositive();
 
-        Item result = instance.findBiId(item.getId());
+        Item result = instance.findBiId2(item.getId());
         assertThat(result).isEqualTo(item);
     }
 

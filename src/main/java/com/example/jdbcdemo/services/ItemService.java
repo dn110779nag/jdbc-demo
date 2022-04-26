@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 public class ItemService {
     private final ItemRepository itemRepository;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public Item create(String name, String description) throws Exception {
         Item item = itemRepository.create3(name, description);
         if(name.equals("ERROR")){
-            throw new RuntimeException("rollback");
+            throw new Exception("rollback");
         }
         return item;
     }
