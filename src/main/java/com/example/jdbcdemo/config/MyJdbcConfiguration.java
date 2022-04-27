@@ -15,6 +15,12 @@ public class MyJdbcConfiguration extends AbstractJdbcConfiguration {
 
     @Override
     protected List<?> userConverters() {
-        return List.of(new JsonNodeToPgObjectConverter(objectMapper), new PgObjectToJsonNodeConverter(objectMapper));
+        return List.of(
+                new JsonNodeToPgObjectConverter(objectMapper),
+                new PgObjectToJsonNodeConverter(objectMapper),
+                new MapToPgObjectConverter(objectMapper),
+                new PgObjectToMapConverter(objectMapper),
+                new ObjectToMapConverter()
+        );
     }
 }

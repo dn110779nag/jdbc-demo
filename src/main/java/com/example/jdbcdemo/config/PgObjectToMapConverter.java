@@ -6,11 +6,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.convert.ReadingConverter;
 
+import java.util.Map;
+
 @Slf4j
 @ReadingConverter
-public class PgObjectToJsonNodeConverter extends PgObjectToDetailsConverter<JsonNode> {
+public class PgObjectToMapConverter extends PgObjectToDetailsConverter<Map<String, Object>> {
 
-    public PgObjectToJsonNodeConverter(ObjectMapper objectMapper) {
+    public PgObjectToMapConverter(ObjectMapper objectMapper) {
         super(new TypeReference<>() {}, objectMapper);
     }
 }

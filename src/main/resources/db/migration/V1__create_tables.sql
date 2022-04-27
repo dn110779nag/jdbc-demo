@@ -9,3 +9,8 @@ create table json_data(
     id bigserial primary key,
     val1 json
 );
+
+create table json_data2(
+    id bigserial primary key,
+    val1 json
+);
