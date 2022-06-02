@@ -15,7 +15,7 @@ public class ItemService {
     public Item create(String name, String description) throws Exception {
         Item item = itemRepository.save(Item.builder()
                         .name(name)
-                        .description(description)
+                        .description1(description)
                 .build());
         if(name.equals("ERROR")){
             throw new RuntimeException("rollback");
